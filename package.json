@@ -1,0 +1,43 @@
+{
+  "name": "nextbus-graphql",
+  "version": "0.0.0",
+  "description": "A GraphQL interface to the NextBus XML Feed",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "start": "babel-node src/index.js",
+    "test": "npm run lint && npm run flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliottsj/nextbus-graphql.git"
+  },
+  "keywords": [
+    "nextbus",
+    "graphql"
+  ],
+  "author": "Spencer Elliott <me@elliottsj.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elliottsj/nextbus-graphql/issues"
+  },
+  "homepage": "https://github.com/elliottsj/nextbus-graphql#readme",
+  "dependencies": {
+    "apollo-server": "^0.2.6",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.14.0",
+    "babel-preset-es2017": "^6.14.0",
+    "body-parser": "^1.15.2",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb-base": "^5.0.3",
+    "eslint-plugin-import": "^1.14.0",
+    "express": "^4.14.0",
+    "flow-bin": "^0.32.0",
+    "graphql": "^0.7.0",
+    "graphql-relay": "^0.4.3",
+    "morgan": "^1.7.0",
+    "nextbus": "file:../nextbus-js"
+  }
+}
