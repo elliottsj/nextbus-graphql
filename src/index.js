@@ -6,11 +6,15 @@ import express from 'express';
 import morgan from 'morgan';
 import url from 'url';
 
+import nextbus from './nextbus';
 import schema from './schema';
 
 const server = express()
   .use(morgan('tiny'))
-  .use('/graphql', bodyParser.json(), apolloExpress({ schema }))
+  .use('/graphql', bodyParser.json(), apolloExpress(() => ({
+    context: { nextbus: nextbus() },
+    schema,
+  })))
   .use('/', graphiqlExpress({ endpointURL: '/graphql' }))
   .listen(3000, () => {
     const address = server.address();

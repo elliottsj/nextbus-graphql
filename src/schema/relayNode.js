@@ -16,13 +16,13 @@ const { nodeInterface, nodeField } = relay.nodeDefinitions(
         title: 'Toronto Transit Commission',
       };
     }
-    throw new Error(`Invalid type: "${type}"`);
+    throw new Error(`Invalid type "${type}"`);
   },
   (obj) => {
     if (obj._type === 'agency') {
       return agencyType;
     }
-    throw new Error(`Invalid object type: "${obj._type}"`);
+    throw new Error(`Invalid object type "${obj._type}"`);
   },
 );
 
