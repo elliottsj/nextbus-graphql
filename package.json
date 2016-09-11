@@ -42,6 +42,7 @@
     "graphql": "^0.7.0",
     "graphql-relay": "^0.4.3",
     "lodash": "^4.15.0",
+    "memoize-id": "^0.2.0",
     "morgan": "^1.7.0",
     "nextbus": "file:../nextbus-js"
   }

@@ -1,3 +1,9 @@
-export { default as agency } from './agency';
-export { default as route } from './route';
-export { default as stop } from './stop';
+import * as agency from './agency';
+import * as route from './route';
+import * as stop from './stop';
+
+export {
+  agency,
+  route,
+  stop,
+};

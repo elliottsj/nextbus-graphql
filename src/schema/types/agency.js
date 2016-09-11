@@ -4,11 +4,12 @@ import * as graphql from 'graphql';
 import * as relay from 'graphql-relay';
 
 import { nodeInterface } from '../relayNode';
-import { route as routeType } from '.';
+import withType from '../withType';
+import { route } from '.';
 
 import type { Route } from '../../nextbus';
 
-export default new graphql.GraphQLObjectType({
+export const type = new graphql.GraphQLObjectType({
   name: 'Agency',
   fields: () => ({
     id: relay.globalIdField('Agency', agency => agency.tag),
@@ -26,8 +27,8 @@ export default new graphql.GraphQLObjectType({
     },
     routes: (() => {
       const { connectionType } = relay.connectionDefinitions({
-        name: 'Route',
-        nodeType: routeType,
+        name: route.type.name,
+        nodeType: route.type,
       });
       return {
         type: connectionType,
@@ -39,14 +40,22 @@ export default new graphql.GraphQLObjectType({
       };
     })(),
     route: {
-      type: routeType,
+      type: route.type,
       args: {
         tag: { type: graphql.GraphQLString },
       },
       async resolve(agency, { tag }, context): Promise<Route> {
-        return await context.nextbus.getRoute(agency.tag, tag);
+        return await route.get(agency.tag, tag, context);
       },
     },
   }),
   interfaces: () => [nodeInterface],
 });
+
+export async function getAll(context: Object) {
+  return (await context.nextbus.getAgencies()).map(withType(type.name));
+}
+
+export async function getNode(id: string, context: Object) {
+  return withType(type.name, await context.nextbus.getAgency(id));
+}

@@ -1,6 +1,7 @@
 // @flow
 
 import DataLoader from 'dataloader';
+import memoize from 'memoize-id';
 import nextbus from 'nextbus';
 
 import type {
@@ -26,8 +27,9 @@ const nb = nextbus({
 });
 
 export default function () {
+  const getAgencies = memoize(nb.getAgencies);
   const agencyLoader = new DataLoader(async (agencyTags: string[]): Promise<Agency[]> => {
-    const agencies = await nb.getAgencies();
+    const agencies = await getAgencies();
     return agencyTags.map(
       tag => (
         agencies.find(agency => agency.tag === tag) ||
@@ -51,7 +53,7 @@ export default function () {
   ));
   return {
     async getAgencies(): Promise<Agency[]> {
-      const agencies = await nb.getAgencies();
+      const agencies = await getAgencies();
       for (const agency of agencies) {
         agencyLoader.prime(agency.tag, agency);
       }

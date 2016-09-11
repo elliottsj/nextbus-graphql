@@ -3,26 +3,36 @@
 import * as relay from 'graphql-relay';
 
 import {
-  agency as agencyType,
+  agency,
+  route,
+  stop,
 } from './types';
 
 const { nodeInterface, nodeField } = relay.nodeDefinitions(
-  async (globalId) => {
+  async (globalId, context, info) => {
     const { type, id } = relay.fromGlobalId(globalId);
-    if (type === 'Agency') {
-      return {
-        _type: 'agency',
-        tag: 'ttc',
-        title: 'Toronto Transit Commission',
-      };
+    switch (type) {
+      case agency.type.name:
+        return agency.getNode(id, context, info);
+      case route.type.name:
+        return route.getNode(id, context, info);
+      case stop.type.name:
+        return stop.getNode(id, context, info);
+      default:
+        throw new Error(`Invalid type "${type}" from global ID "${globalId}"`);
     }
-    throw new Error(`Invalid type "${type}"`);
   },
   (obj) => {
-    if (obj._type === 'agency') {
-      return agencyType;
+    switch (obj.type) {
+      case agency.type.name:
+        return agency.type;
+      case route.type.name:
+        return route.type;
+      case stop.type.name:
+        return stop.type;
+      default:
+        throw new Error(`Invalid object type "${obj.type}"`);
     }
-    throw new Error(`Invalid object type "${obj._type}"`);
   },
 );
 
