@@ -16,7 +16,7 @@ const server = express()
     schema,
   })))
   .use('/', graphiqlExpress({ endpointURL: '/graphql' }))
-  .listen(3000, () => {
+  .listen(4000, () => {
     const address = server.address();
     console.info(`serving on ${url.format({
       protocol: 'http',
