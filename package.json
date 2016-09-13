@@ -4,10 +4,14 @@
   "description": "A GraphQL interface to the NextBus XML Feed",
   "main": "src/index.js",
   "scripts": {
+    "babel": "babel src --out-dir lib",
+    "build": "del ./lib && npm run babel && npm run update-schema",
     "lint": "eslint src",
     "flow": "flow",
+    "prepublish": "npm run build",
     "start": "babel-node src/index.js",
-    "test": "npm run lint && npm run flow"
+    "test": "npm run lint && npm run flow",
+    "update-schema": "babel-node src/scripts/updateSchema.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,17 @@
   "homepage": "https://github.com/elliottsj/nextbus-graphql#readme",
   "dependencies": {
     "apollo-server": "^0.2.6",
+    "body-parser": "^1.15.2",
+    "dataloader": "^1.2.0",
+    "express": "^4.14.0",
+    "graphql": "^0.7.0",
+    "graphql-relay": "^0.4.3",
+    "lodash": "^4.15.0",
+    "memoize-id": "^0.2.0",
+    "morgan": "^1.7.0",
+    "nextbus": "^0.0.6"
+  },
+  "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
@@ -32,18 +47,10 @@
     "babel-plugin-transform-flow-strip-types": "^6.14.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2017": "^6.14.0",
-    "body-parser": "^1.15.2",
-    "dataloader": "^1.2.0",
+    "del-cli": "^0.2.0",
     "eslint": "^3.4.0",
     "eslint-config-airbnb-base": "^5.0.3",
     "eslint-plugin-import": "^1.14.0",
-    "express": "^4.14.0",
-    "flow-bin": "^0.32.0",
-    "graphql": "^0.7.0",
-    "graphql-relay": "^0.4.3",
-    "lodash": "^4.15.0",
-    "memoize-id": "^0.2.0",
-    "morgan": "^1.7.0",
-    "nextbus": "file:../nextbus-js"
+    "flow-bin": "^0.32.0"
   }
 }
