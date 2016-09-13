@@ -2,7 +2,7 @@
   "name": "nextbus-graphql",
   "version": "0.0.2",
   "description": "A GraphQL interface to the NextBus XML Feed",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "babel": "babel src --out-dir lib",
     "build": "del ./lib && npm run babel && npm run update-schema",
