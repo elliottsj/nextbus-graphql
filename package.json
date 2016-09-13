@@ -10,7 +10,7 @@
     "flow": "flow",
     "prepublish": "npm run build",
     "start": "babel-node src/index.js",
-    "test": "npm run lint && npm run flow",
+    "test": "npm run lint",
     "update-schema": "babel-node src/scripts/updateSchema.js"
   },
   "repository": {
