@@ -1,6 +1,6 @@
 {
   "name": "nextbus-graphql",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A GraphQL interface to the NextBus XML Feed",
   "main": "src/index.js",
   "scripts": {
