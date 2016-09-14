@@ -52,10 +52,14 @@ export const type = new graphql.GraphQLObjectType({
   interfaces: () => [nodeInterface],
 });
 
+export async function get(tag: string, context: Object) {
+  return withType(type.name, await context.nextbus.getAgency(tag));
+}
+
 export async function getAll(context: Object) {
   return (await context.nextbus.getAgencies()).map(withType(type.name));
 }
 
 export async function getNode(id: string, context: Object) {
-  return withType(type.name, await context.nextbus.getAgency(id));
+  return await get(id, context);
 }
