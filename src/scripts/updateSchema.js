@@ -20,12 +20,12 @@ try {
   if (result.errors) {
     console.error(
       'ERROR introspecting schema: ',
-      JSON.stringify(result.errors, null, 2)
+      JSON.stringify(result.errors, null, 2),
     );
   } else {
     fs.writeFileSync(
       path.join(libDir, 'schema.json'),
-      JSON.stringify(result, null, 2)
+      JSON.stringify(result, null, 2),
     );
   }
 })();
@@ -33,5 +33,5 @@ try {
 // Save user readable type system shorthand of schema
 fs.writeFileSync(
   path.join(libDir, 'schema.graphql'),
-  printSchema(Schema)
+  printSchema(Schema),
 );
