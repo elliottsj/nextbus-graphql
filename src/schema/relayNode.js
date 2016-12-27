@@ -6,6 +6,7 @@ import {
   agency,
   route,
   stop,
+  viewer,
 } from './types';
 
 const { nodeInterface, nodeField } = relay.nodeDefinitions(
@@ -18,6 +19,8 @@ const { nodeInterface, nodeField } = relay.nodeDefinitions(
         return route.getNode(id, context, info);
       case stop.type.name:
         return stop.getNode(id, context, info);
+      case viewer.type.name:
+        return viewer.getNode(id, context, info);
       default:
         throw new Error(`Invalid type "${type}" from global ID "${globalId}"`);
     }
@@ -30,6 +33,8 @@ const { nodeInterface, nodeField } = relay.nodeDefinitions(
         return route.type;
       case stop.type.name:
         return stop.type;
+      case viewer.type.name:
+        return viewer.type;
       default:
         throw new Error(`Invalid object type "${obj.type}"`);
     }

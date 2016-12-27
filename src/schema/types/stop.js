@@ -53,7 +53,7 @@ export async function getAll(agencyTag: string, routeTag: string, context: Objec
       ...stop,
       agencyTag,
       routeTag,
-    })
+    }),
   );
 }
 
@@ -63,7 +63,7 @@ export async function get(agencyTag: string, routeTag: string, stopTag: string, 
     return stop;
   }
   throw new Error(
-    `No stop for agency tag "${agencyTag}", route tag "${routeTag}", stop tag "${stopTag}"`
+    `No stop for agency tag "${agencyTag}", route tag "${routeTag}", stop tag "${stopTag}"`,
   );
 }
 

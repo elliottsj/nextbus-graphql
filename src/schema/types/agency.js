@@ -45,7 +45,7 @@ export const type = new graphql.GraphQLObjectType({
         tag: { type: graphql.GraphQLString },
       },
       async resolve(agency, { tag }, context): Promise<Route> {
-        return await route.get(agency.tag, tag, context);
+        return route.get(agency.tag, tag, context);
       },
     },
   }),
@@ -61,5 +61,5 @@ export async function getAll(context: Object) {
 }
 
 export async function getNode(id: string, context: Object) {
-  return await get(id, context);
+  return get(id, context);
 }

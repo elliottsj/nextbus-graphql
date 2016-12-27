@@ -34,7 +34,7 @@ export default function () {
       tag => (
         agencies.find(agency => agency.tag === tag) ||
         new Error(`No agency with tag: "${tag}"`)
-      )
+      ),
     );
   });
   const routeLoader = new DataLoader(
@@ -42,21 +42,19 @@ export default function () {
       async (agencyTag) => {
         const routes = await nb.getRoutes(agencyTag);
         return routes.map(route => ({ ...route, agencyTag }));
-      }
-    ))
+      },
+    )),
   );
   const routeConfigLoader = new DataLoader((compositeKeys: string[]) => Promise.all(
     compositeKeys.map(async (compositeKey: string) => {
       const [agencyTag, routeTag] = compositeKey.split(':');
       return { ...(await nb.getRoute(agencyTag, routeTag)), agencyTag };
-    })
+    }),
   ));
   return {
     async getAgencies(): Promise<Agency[]> {
       const agencies = await getAgencies();
-      for (const agency of agencies) {
-        agencyLoader.prime(agency.tag, agency);
-      }
+      agencies.forEach(agency => agencyLoader.prime(agency.tag, agency));
       return agencies;
     },
     getAgency(tag: string): Promise<Agency> {
